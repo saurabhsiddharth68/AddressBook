@@ -14,8 +14,8 @@ public class ContactDetails {
 
     }
 
-    public ContactDetails(String firstName, String lastName, String address, String city,
-                          String state, int zipCode, long mobileNumber, String emailId) {
+    public ContactDetails(String firstName, String lastName, String address, String city, String state, int zipCode,
+            long mobileNumber, String emailId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -92,15 +92,8 @@ public class ContactDetails {
 
     @Override
     public String toString() {
-        return "ContactDetails{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zipCode=" + zipCode +
-                ", mobileNo=" + mobileNumber +
-                ", emailId='" + emailId + '\'' +
-                '}';
+        return "ContactDetails{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", address='"
+                + address + '\'' + ", city='" + city + '\'' + ", state='" + state + '\'' + ", zipCode=" + zipCode
+                + ", mobileNo=" + mobileNumber + ", emailId='" + emailId + '\'' + '}';
     }
 }
