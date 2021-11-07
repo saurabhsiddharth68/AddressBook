@@ -12,13 +12,22 @@ public class AddressBook {
     */
 
     List<ContactDetails> contactDetailsList = new ArrayList<>();
+    ContactDetails person = new ContactDetails();
     Scanner scanner = new Scanner(System.in);
     public void addContact() {
         System.out.println("Enter the number of contacts you want to enter");
         int number = scanner.nextInt();
         for (int i = 0; i < number; i++) {
+            // Cheking the duplicate contact by contact name
             System.out.println("Enter the contact details of person ");
-            writeContact();
+            String fName = scanner.next();
+            if (fName.equals(person.getFirstName())) {
+                System.out.println("The entered person is already exist.");
+            }else {
+                System.out.println("Enter the contact details of person");
+                writeContact();
+                System.out.println("Contact added Successfully");
+            }
         }
     }
     public void writeContact() {
