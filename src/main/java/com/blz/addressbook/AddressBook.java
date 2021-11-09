@@ -1,8 +1,6 @@
 package com.blz.addressbook;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBook {
@@ -12,27 +10,30 @@ public class AddressBook {
    And Printing The Contact Details Of Person
     */
 
-    List<ContactDetails> contactDetailsList = new ArrayList<>();
     ContactDetails person = new ContactDetails();
-    Scanner scanner = new Scanner(System.in);
+    List<ContactDetails> contactDetailsList = new ArrayList<>();
+
     public void addContact() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of contacts you want to enter");
         int number = scanner.nextInt();
         for (int i = 0; i < number; i++) {
-            // Cheking the duplicate contact by contact name
-            System.out.println("Enter the contact details of person ");
+
+//            checking the duplicate contact by contact name.
+            System.out.println("Enter the first name of person");
             String fName = scanner.next();
             if (fName.equals(person.getFirstName())) {
-                System.out.println("The entered person is already exist.");
-            }else {
-                System.out.println("Enter the contact details of person");
+                System.out.println("The entered person is already exist. Enter new name");
+            } else {
+                System.out.println("Enter the contact details of person ");
                 writeContact();
-                System.out.println("Contact added Successfully");
+                System.out.println("contact added Successfully");
             }
         }
     }
+
     public void writeContact() {
-        ContactDetails person = new ContactDetails();
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter First Name : ");
         String firstName = scanner.next();
         System.out.println("Enter Last Name : ");
@@ -51,9 +52,9 @@ public class AddressBook {
         String emailId = scanner.next();
         person = new ContactDetails(firstName, lastName, address, city, state, zipCode, mobileNumber, emailId);
         contactDetailsList.add(person);
-        printContact();
     }
-    public void searchByName(String name){
+
+    public void searchByName(String name) {
         List<ContactDetails> collect = contactDetailsList.stream().filter(p -> p.getFirstName().equalsIgnoreCase(name)).collect(Collectors.toList());
         for (ContactDetails contact : collect) {
             System.out.println("Search result: " + contact);
@@ -164,38 +165,20 @@ public class AddressBook {
     */
 
     public void deleteContact() {
-        System.out.println("Enter the first name of person to delete contact");
+        System.out.println("Enter the first name of contact you want to delete");
+        Scanner scanner = new Scanner(System.in);
         String deleteName = scanner.next();
-        int i = 0;
-        for ( ;i < contactDetailsList.size(); i++) {
-            String name = contactDetailsList.get(i).getFirstName();
-            if (name.equalsIgnoreCase(deleteName)) {
-                break;
+        for (int i = 0; i < contactDetailsList.size(); i++) {
+            if (deleteName.equalsIgnoreCase(contactDetailsList.get(i).getFirstName())) {
+                contactDetailsList.remove(i);
+                System.out.println("contact delete successfully");
+            } else {
+                System.out.println("enter name dose not exit");
             }
         }
-        if (i < contactDetailsList.size()) {
-            contactDetailsList.remove(i);
-            System.out.println("Contact Deleted");
-            System.out.println("Remaining contacts in the book isgit");
-            printContact();
-        }else {
-            System.out.println("Contact not find");
-        }
+    }
 
-    }
-    public void printContact() {
-        for (int i = 0; i < contactDetailsList.size(); i++) {
-            System.out.println("Contact Details");
-            System.out.println("Name         : " + contactDetailsList.get(i).getFirstName()+ " " + contactDetailsList.get(i).getLastName() + "\n"
-                    + "Address      : " + contactDetailsList.get(i).getAddress()   + "\n"
-                    + "City         : " + contactDetailsList.get(i).getCity()      + "\n"
-                    + "State        : " + contactDetailsList.get(i).getState()     + "\n"
-                    + "ZipCode      : " + contactDetailsList.get(i).getZipCode()   + "\n"
-                    + "MobileNumber : " + contactDetailsList.get(i).getMobileNo()  + "\n"
-                    + "EmailId      : " + contactDetailsList.get(i).getEmailId()   + "\n");
-        }
-    }
-    public void searchByOptions() {
+    public void viewByOptions() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Enter\n 1. By name\n 2. By city\n 3. By state\n 4. for previous menu");
@@ -205,17 +188,17 @@ public class AddressBook {
                 case 1:
                     System.out.println("Enter name: ");
                     String name = scanner.nextLine();
-                    contactDetailsList.forEach(book -> searchByName(name));
+                    searchByName(name);
                     break;
                 case 2:
                     System.out.println("Enter city: ");
                     String city = scanner.nextLine();
-                    contactDetailsList.forEach(book -> searchByCity(city));
+                    searchByCity(city);
                     break;
                 case 3:
                     System.out.println("Enter state: ");
                     String state = scanner.nextLine();
-                    contactDetailsList.forEach(book -> searchByState(state));
+                    System.out.println(state);
                     break;
                 case 4:
                     return;
