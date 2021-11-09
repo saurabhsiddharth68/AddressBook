@@ -1,5 +1,7 @@
 package com.blz.addressbook;
 
+import java.util.Objects;
+
 public class ContactDetails {
     private String firstName;
     private String lastName;
