@@ -100,6 +100,15 @@ public class AddressBook {
                 .forEach(contact -> System.out.println(contact.getFirstName()+" "+contact.getLastName()));
     }
 
+    /*
+  Declaring Sort Method
+  Sorting The Details Of Contact By City
+  */
+    public void sortByCity() {
+        List<ContactDetails> list = contactDetailsList.stream().collect(Collectors.toList());
+        list.stream().sorted((g1, g2) -> ((String) g1.getCity()).compareTo(g2.getCity()))
+                .forEach(contact -> System.out.println(contact.getFirstName() + " " + contact.getLastName()));
+    }
 
     /*
     Declaring The Edit Contact Method
@@ -234,6 +243,8 @@ public class AddressBook {
                 case 5:
                     sortByName();
                     break;
+                case 6:
+                    sortByCity();
                 case 0:
                     return;
                 default:
