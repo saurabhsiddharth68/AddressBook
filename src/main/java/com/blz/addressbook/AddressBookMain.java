@@ -1,6 +1,10 @@
 package com.blz.addressbook;
 
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class AddressBookMain {
 
@@ -9,7 +13,7 @@ public class AddressBookMain {
         AddressBook obj2 = new AddressBook();
         while (true) {
             System.out.println("Enter \n 1. To add The new AddressBook\n 2. To do AddressBook functions\n 3. To delete the AddressBook\n " +
-                    "4. To Print the AddressBook\n 5. To Print the contacts in AddressBook\n 6. To show search options\n 0. to exit");
+                    "4. To Print the AddressBook\n 5. To Print the contacts in AddressBook\n 6. To book options\n 0. to exit");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             switch (choice) {
@@ -40,6 +44,32 @@ public class AddressBookMain {
         }
     }
     public static void main(String[] args) {
+        System.out.println("Welcome To Address Book Program");
+        Scanner Scan=new Scanner(System.in);
+
+        try {
+            InputStream inputStream = new FileInputStream("C:\\Users\\lenovo\\IdeaProjects\\AddressBook\\src\\main\\resources\\Welcome.txt");
+            int byteData = inputStream.read();
+            if(byteData!=-1){
+                System.out.println(byteData);
+            }
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
+
+
+        File file = new File("C:\\Users\\lenovo\\IdeaProjects\\AddressBook\\src\\main\\resources\\AddressBookDetails.txt");
+        try {
+            boolean isFileCreated = file.createNewFile();
+            if (isFileCreated) {
+                System.out.println("File Created successfully!!1");
+            } else {
+                System.out.println("Something went wrong or file already exist");
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
         AddressBookMain addressBookMain = new AddressBookMain();
         addressBookMain.choose();
     }
